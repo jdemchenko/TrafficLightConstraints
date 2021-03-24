@@ -9,11 +9,42 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: - IO Outlets
+    @IBOutlet weak var greenLightView: UIView!
+    @IBOutlet weak var yellowLightView: UIView!
+    @IBOutlet weak var redLightView: UIView!
+    @IBOutlet weak var startBtn: UIButton!
+    
+    
+    
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        startBtn.layer.cornerRadius = 10
+        
+        greenLightView.layer.cornerRadius = 50
+        yellowLightView.layer.cornerRadius = 50
+        redLightView.layer.cornerRadius = 50
+        
+        greenLightView.alpha = 0.2
+        yellowLightView.alpha = 0.2
+        redLightView.alpha = 0.2
     }
 
-
+    // MARK: - IB Actions
+    @IBAction func startBtnPressed() {
+        startBtn.setTitle("NEXT", for: .normal)
+        if redLightView.alpha != 1 && yellowLightView.alpha != 1 {
+            redLightView.alpha = 1
+            greenLightView.alpha = 0.2
+        } else if (yellowLightView.alpha != 1 && greenLightView.alpha != 1) {
+            yellowLightView.alpha = 1
+            redLightView.alpha = 0.2
+        } else {
+            greenLightView.alpha = 1
+            yellowLightView.alpha = 0.2
+        }
+    }
+    
 }
 
