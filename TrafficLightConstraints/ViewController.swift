@@ -21,19 +21,30 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startBtn.layer.cornerRadius = 10
-        
-        greenLightView.layer.cornerRadius = 50
-        yellowLightView.layer.cornerRadius = 50
-        redLightView.layer.cornerRadius = 50
-        
-        greenLightView.alpha = 0.2
-        yellowLightView.alpha = 0.2
-        redLightView.alpha = 0.2
+        roundingView()
+        setViewAlpha()
     }
 
     // MARK: - IB Actions
     @IBAction func startBtnPressed() {
         startBtn.setTitle("NEXT", for: .normal)
+        switchingTrafficLights()
+    }
+    
+    // MARK: - Private Methods
+    private func setViewAlpha() {
+        greenLightView.alpha = 0.2
+        yellowLightView.alpha = 0.2
+        redLightView.alpha = 0.2
+    }
+    
+    private func roundingView() {
+        greenLightView.layer.cornerRadius = 50
+        yellowLightView.layer.cornerRadius = 50
+        redLightView.layer.cornerRadius = 50
+    }
+    
+    private func switchingTrafficLights() {
         if redLightView.alpha != 1 && yellowLightView.alpha != 1 {
             redLightView.alpha = 1
             greenLightView.alpha = 0.2
@@ -45,6 +56,7 @@ class ViewController: UIViewController {
             yellowLightView.alpha = 0.2
         }
     }
+    
     
 }
 
