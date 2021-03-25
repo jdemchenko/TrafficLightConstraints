@@ -8,23 +8,26 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     // MARK: - IO Outlets
     @IBOutlet weak var greenLightView: UIView!
     @IBOutlet weak var yellowLightView: UIView!
     @IBOutlet weak var redLightView: UIView!
     @IBOutlet weak var startBtn: UIButton!
     
+    private var lighter: [UIView] = []
+    var counterOfLighter = 0
     
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        lighter = [greenLightView, yellowLightView, redLightView]
         startBtn.layer.cornerRadius = 10
         roundingView()
         setViewAlpha()
     }
-
+    
     // MARK: - IB Actions
     @IBAction func startBtnPressed() {
         startBtn.setTitle("NEXT", for: .normal)
@@ -45,16 +48,9 @@ class ViewController: UIViewController {
     }
     
     private func switchingTrafficLights() {
-        if redLightView.alpha != 1 && yellowLightView.alpha != 1 {
-            redLightView.alpha = 1
-            greenLightView.alpha = 0.2
-        } else if (yellowLightView.alpha != 1 && greenLightView.alpha != 1) {
-            yellowLightView.alpha = 1
-            redLightView.alpha = 0.2
-        } else {
-            greenLightView.alpha = 1
-            yellowLightView.alpha = 0.2
-        }
+        setViewAlpha()
+        lighter[counterOfLighter].alpha = 1
+        counterOfLighter = (counterOfLighter + 1) % lighter.count
     }
     
     
